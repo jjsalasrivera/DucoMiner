@@ -31,5 +31,5 @@ private:
 	bool _equals( const unsigned char* hash, const unsigned char* expected, int length );
 	unsigned char _fromASCII( const char c );
 	size_t _getNumberOfbytes( int n );
-	void _sendResult( int result, float hashRate, const char* identifier, int threadId, int difficult );
+	void _sendResult( int result, float hashRate, const char* identifier, int threadId, int difficult, float seconds );
 };

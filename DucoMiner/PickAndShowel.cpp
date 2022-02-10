@@ -28,23 +28,23 @@ void PickAndShowel::operator()(int threadId, json configuration )
 		jobTokens.lastHash = NULL;
 		_askJob(jobTokens, configuration["UserName"].get<string>().c_str(), configuration["Start_Diff"].get<string>().c_str());
 		
-		// calculate hash
-		auto start = chrono::high_resolution_clock::now();
-		
-		int res = _searchResult( jobTokens );
-		
-		auto stop = chrono::high_resolution_clock::now();
-		float endSeconds = (float) chrono::duration_cast<chrono::seconds>( stop - start ).count();
-		
-		if( endSeconds == 0.0 )
-			endSeconds = 0.5;
-		
-		float hashRate = res / endSeconds;
-		// send result
-		_sendResult(res, hashRate, configuration["MinerIdentifier"].get<string>().c_str(), threadId, jobTokens.diff );
-		
-		delete[] jobTokens.expectedHash;
-		delete[] jobTokens.lastHash;
+		if( jobTokens.expectedHash != NULL && jobTokens.lastHash != NULL)
+		{
+			// calculate hash
+			auto start = chrono::high_resolution_clock::now();
+			
+			int res = _searchResult( jobTokens );
+			
+			auto stop = chrono::high_resolution_clock::now();
+			float endMilis = (float) chrono::duration_cast<chrono::milliseconds>( stop - start ).count();
+			
+			float hashRate = ((float)res / (endMilis / 1000.0 ));
+			// send result
+			_sendResult(res, hashRate, configuration["MinerIdentifier"].get<string>().c_str(), threadId, jobTokens.diff, endMilis/1000.0 );
+			
+			delete[] jobTokens.expectedHash;
+			delete[] jobTokens.lastHash;
+		}
 		
 		int intensity = configuration["Intensity"].get<int>();
 		int milisToSleep( 10 );
@@ -199,7 +199,7 @@ int PickAndShowel::_searchResult( JobTokens& job )
 	return res;
 }
 
-void PickAndShowel::_sendResult( int result, float hashRate, const char* identifier, int threadId, int difficult )
+void PickAndShowel::_sendResult( int result, float hashRate, const char* identifier, int threadId, int difficult, float seconds )
 {
 	char message[128];
 	sprintf( message, "%d,%f,DucoMiner V0.1,%s,,%d\n", result, hashRate, identifier, threadId );
@@ -213,12 +213,12 @@ void PickAndShowel::_sendResult( int result, float hashRate, const char* identif
 	
 	if( strcmp( "GOOD\n", response ) == 0)
 	{
-		sprintf(log,"Core%d - %s - Accepted with difficult %d. Hash rate: %f H/s", threadId, timeStr, difficult, hashRate );
+		sprintf(log,"Core%d - %s - Accepted with difficult %d. Hash rate: %f H/s. Time: %f s", threadId, timeStr, difficult, hashRate, seconds );
 		Logger::Green(log);
 	}
 	else
 	{
-		sprintf(log,"Core%d - %s - %s - difficult: %d - hashRate: %f H/s", threadId, timeStr, response, difficult, hashRate );
+		sprintf(log,"Core%d - %s - %s - difficult: %d - hashRate: %f H/s, Time: %f s", threadId, timeStr, response, difficult, hashRate, seconds );
 		Logger::Yellow(log);
 	}
 }
