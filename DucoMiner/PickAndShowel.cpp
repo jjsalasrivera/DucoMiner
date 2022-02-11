@@ -211,7 +211,7 @@ void PickAndShowel::_sendResult( int result, float hashRate, const char* identif
 	
 	char log[128];
 	
-	if( strcmp( response, "GOOD\n" ) == 0)
+	if( strstr( response, "GOOD\n" ) != NULL )
 	{
 		sprintf(log,"Core(%d) - %s - Accepted with difficult %d. Hash rate: %f H/s. Time: %f s", threadId, dateTime, difficult, hashRate, seconds );
 		Logger::Green(log);
