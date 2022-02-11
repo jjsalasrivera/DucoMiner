@@ -32,4 +32,6 @@ private:
 	unsigned char _fromASCII( const char c );
 	size_t _getNumberOfbytes( int n );
 	void _sendResult( int result, float hashRate, const char* identifier, int threadId, int difficult, float seconds );
+	const char* _getTime();
+
 };

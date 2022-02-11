@@ -207,20 +207,36 @@ void PickAndShowel::_sendResult( int result, float hashRate, const char* identif
 	char response[128];
 	_sendAndReceive( message, response, 128 );
 	
-	time_t now = time( 0 );
-	char* timeStr = ctime( &now );
+	const char* dateTime = _getTime();
+	
 	char log[128];
 	
-	if( strcmp( "GOOD\n", response ) == 0)
+	if( strcmp( response, "GOOD\n" ) == 0)
 	{
-		sprintf(log,"Core%d - %s - Accepted with difficult %d. Hash rate: %f H/s. Time: %f s", threadId, timeStr, difficult, hashRate, seconds );
+		sprintf(log,"Core(%d) - %s - Accepted with difficult %d. Hash rate: %f H/s. Time: %f s", threadId, dateTime, difficult, hashRate, seconds );
 		Logger::Green(log);
 	}
 	else
 	{
-		sprintf(log,"Core%d - %s - %s - difficult: %d - hashRate: %f H/s, Time: %f s", threadId, timeStr, response, difficult, hashRate, seconds );
+		sprintf(log,"Core(%d) - %s - %s - difficult: %d - hashRate: %f H/s, Time: %f s", threadId, dateTime, response, difficult, hashRate, seconds );
 		Logger::Yellow(log);
 	}
+	
+	delete [] dateTime;
+}
+
+const char* PickAndShowel::_getTime()
+{
+	time_t now;
+	struct tm* timeinfo;
+	
+	time( &now );
+	timeinfo = localtime( &now );
+	
+	char* strTime = new char[20];
+	sprintf(strTime, "%d-%02d-%02d %02d:%02d:%02d", timeinfo->tm_year+1900, timeinfo->tm_mon+1, timeinfo->tm_mday, timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
+	
+	return strTime;
 }
 
 bool PickAndShowel::_equals( const unsigned char* hash, const unsigned char* expected, int length )
