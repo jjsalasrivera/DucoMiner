@@ -13,7 +13,7 @@ void PickAndShowel::operator()(int threadId, json configuration )
 	while( run )
 	{
 		// Connect to IP
-		_checkConnection(configuration["IP"].get<string>().c_str(), configuration["Port"].get<int>() );
+		_checkConnection(configuration["IP"].get<string>().c_str(), configuration["Port"].get<int>(), threadId );
 		
 		// Send MOTD (if neccesary)
 		if( !motdSended )
@@ -49,20 +49,20 @@ void PickAndShowel::operator()(int threadId, json configuration )
 		int intensity = configuration["Intensity"].get<int>();
 		int milisToSleep( 10 );
 		
-		if( intensity >= 90 && intensity < 95 )
-			milisToSleep = 100;
+		if( intensity >= 90 && intensity < 95)
+			milisToSleep = 50;
 		else if(  intensity >= 75 && intensity < 90 )
-			milisToSleep = 300;
+			milisToSleep = 200;
 		else if(  intensity >= 50 && intensity < 75 )
-			milisToSleep = 600;
+			milisToSleep = 400;
 		else if(  intensity >= 0 && intensity < 50 )
-			milisToSleep = 800;
+			milisToSleep = 600;
 		
 		this_thread::sleep_for(chrono::milliseconds(milisToSleep));
 	}
 }
 
-void PickAndShowel::_checkConnection( const char* IP, int Port )
+void PickAndShowel::_checkConnection( const char* IP, int Port, int threadId )
 {
 	struct sockaddr_in serv_addr;
 	
@@ -92,7 +92,7 @@ void PickAndShowel::_checkConnection( const char* IP, int Port )
 		recv( _socket, buffer, 8, NULL);
 		
 		char message[200];
-		sprintf( message, "Connected to: %s:%d", IP, Port );
+		sprintf( message, "Core(%d) - Connected to: %s:%d", threadId, IP, Port );
 		Logger::White(message);
 		Logger::White(buffer);
 		_isConnected = true;
