@@ -170,7 +170,8 @@ int PickAndShowel::_searchResult( JobTokens& job )
 	unsigned char hash[SHA_DIGEST_LENGTH]; // == 20
 	unsigned char expected_hash_byte[SHA_DIGEST_LENGTH];
 	
-	unsigned char charNumber[10];
+	//unsigned char charNumber[10];
+	char charNumber[10];
 	size_t sizeOfHash = strlen( job.lastHash );
 	
 	for(int j = 0; j < SHA_DIGEST_LENGTH; ++j)
@@ -179,17 +180,25 @@ int PickAndShowel::_searchResult( JobTokens& job )
 		expected_hash_byte[j] = e;
 	}
 	
-	char tmp[60];
+	//char tmp[60];
+	SHA_CTX ctx;
+	SHA1_Init(&ctx);
+	SHA1_Update(&ctx, job.lastHash, sizeOfHash);
 	
 	for( int i = 0; i <= job.diff * 100; ++i)
 	{
-		std::strcpy( tmp, job.lastHash );
-		std::sprintf((char*)charNumber, "%d", i);
-		std::strcat(tmp, (const char*)charNumber);
+		//strcpy( tmp, job.lastHash );
+		sprintf(charNumber, "%d", i);
+		//strcat(tmp, (const char*)charNumber);
+		//sprintf(tmp,"%s%d", job.lastHash,i);
+		SHA_CTX ctx_copy(ctx);
 		
-		SHA1((unsigned const char*)tmp, sizeOfHash + _getNumberOfbytes(i), hash);
+		SHA1_Update(&ctx_copy, charNumber, _getNumberOfbytes(i) );
+		SHA1_Final(hash, &ctx_copy);
 		
-		if( _equals( hash, expected_hash_byte, SHA_DIGEST_LENGTH ))
+		//SHA1 ((unsigned const char*)tmp, sizeOfHash + _getNumberOfbytes(i), hash);
+		
+		if( _equals( hash, expected_hash_byte)) //, SHA_DIGEST_LENGTH ))
 		{
 			res = i;
 			break;
@@ -239,13 +248,30 @@ const char* PickAndShowel::_getTime()
 	return strTime;
 }
 
-bool PickAndShowel::_equals( const unsigned char* hash, const unsigned char* expected, int length )
+bool PickAndShowel::_equals( const unsigned char* hash, const unsigned char* expected ) //, int length )
 {
+	/*
 	for( int i = 0; i < length; ++i )
 	{
 		if(hash[i] != expected[i])
 			return false;
 	}
+	*/
+	
+	const unsigned char* h = hash;
+	const unsigned char* e = expected;
+	
+	while( *h )
+	{
+		if( *h != *e )
+			return false;
+		
+		++h;
+		++e;
+	}
+	
+	if( *h != *e )
+		return false;
 	
 	return true;
 }
