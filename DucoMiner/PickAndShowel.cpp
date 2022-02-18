@@ -5,6 +5,7 @@
 #include <thread>
 #include <openssl/sha.h>
 #include <ctime>
+#include <string>
 
 using namespace std;
 
@@ -198,7 +199,7 @@ int PickAndShowel::_searchResult( JobTokens& job ) const
 		
 		//SHA1 ((unsigned const char*)tmp, sizeOfHash + _getNumberOfbytes(i), hash);
 		
-		if( _equals( hash, expected_hash_byte)) //, SHA_DIGEST_LENGTH ))
+		if( _equals( hash, expected_hash_byte, SHA_DIGEST_LENGTH))
 		{
 			res = i;
 			break;
@@ -211,7 +212,7 @@ int PickAndShowel::_searchResult( JobTokens& job ) const
 void PickAndShowel::_sendResult( int result, float hashRate, const char* identifier, int threadId, int difficult, float seconds )
 {
 	char message[128];
-	sprintf( message, "%d,%f,DucoMiner V0.1,%s,,%d\n", result, hashRate, identifier, threadId );
+	sprintf( message, "%d,%f,DucoMiner V0.1,%s,,%d\n", result, hashRate, identifier, MINER_ID );
 	
 	char response[128];
 	_sendAndReceive( message, response, 128 );
@@ -248,7 +249,7 @@ const char* PickAndShowel::_getTime() const
 	return strTime;
 }
 
-bool PickAndShowel::_equals( const unsigned char* hash, const unsigned char* expected )  const//, int length )
+bool PickAndShowel::_equals( const unsigned char* hash, const unsigned char* expected, int length ) const
 {
 	/*
 	for( int i = 0; i < length; ++i )
@@ -257,11 +258,13 @@ bool PickAndShowel::_equals( const unsigned char* hash, const unsigned char* exp
 			return false;
 	}
 	*/
+	//return memcmp( hash, expected, SHA_DIGEST_LENGTH) == 0;
+	
 	
 	const unsigned char* h = hash;
 	const unsigned char* e = expected;
 	
-	while( *h )
+	while( length-- )
 	{
 		if( *h != *e )
 			return false;
@@ -269,9 +272,6 @@ bool PickAndShowel::_equals( const unsigned char* hash, const unsigned char* exp
 		++h;
 		++e;
 	}
-	
-	if( *h != *e )
-		return false;
 	
 	return true;
 }

@@ -2,6 +2,8 @@
 
 #include "json.h"
 
+#define MINER_ID 1110 	// A random number to identify miners
+
 using namespace nlohmann;
 
 typedef struct
@@ -28,7 +30,7 @@ private:
 	bool _askJob( JobTokens& tokens, const char* userName, const char* diff );
 	void _sendAndReceive( const char* message, char* response, int length );
 	int _searchResult( JobTokens& job ) const;
-	bool _equals( const unsigned char* hash, const unsigned char* expected ) const; //, int length );
+	bool _equals( const unsigned char* hash, const unsigned char* expected, int length  ) const;
 	unsigned char _fromASCII( const char c ) const;
 	size_t _getNumberOfbytes( int n ) const;
 	void _sendResult( int result, float hashRate, const char* identifier, int threadId, int difficult, float seconds );

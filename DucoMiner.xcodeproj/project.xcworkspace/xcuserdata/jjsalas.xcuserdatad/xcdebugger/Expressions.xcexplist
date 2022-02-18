@@ -3,13 +3,10 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;::__is_long() const [inlined]:string">
-      </ContextState>
-      <ContextState
-         contextName = "DucoMiner::_getBestServer():DucoMiner.cpp">
+         contextName = "PickAndShowel::_equals(unsigned char const*, unsigned char const*) const [inlined]:PickAndShowel.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "res-&gt;body">
+               value = "h">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -20,6 +17,17 @@
                value = "ex.m">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DucoMiner::_getBestServer():DucoMiner.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "res-&gt;body">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;::__is_long() const [inlined]:string">
       </ContextState>
    </ContextStates>
 </VariablesViewState>
