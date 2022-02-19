@@ -3,7 +3,7 @@ SOURCE	= DucoMiner.cpp Logger.cpp main.cpp PickAndShowel.cpp
 HEADER	= AbstractMiner.h DucoMiner.h json.h Logger.h PickAndShowel.h
 OUT	= DucoMiner
 CC	 = g++
-FLAGS	 = -g -c -Wall
+FLAGS	 =  -c -Ofast -Wall
 LFLAGS	 = -lssl -lcrypto -lpthread
 
 all: $(OBJS)
