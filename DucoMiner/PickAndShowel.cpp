@@ -165,7 +165,7 @@ void PickAndShowel::_sendAndReceive( const char* message, char* response, int le
 	}
 }
 
-int PickAndShowel::_searchResult( JobTokens& job ) const
+inline int PickAndShowel::_searchResult( JobTokens& job ) const
 {
 	int res( 0 );
 	unsigned char hash[SHA_DIGEST_LENGTH]; // == 20
@@ -249,7 +249,7 @@ const char* PickAndShowel::_getTime() const
 	return strTime;
 }
 
-bool PickAndShowel::_equals( const unsigned char* hash, const unsigned char* expected, int length ) const
+inline bool PickAndShowel::_equals( const unsigned char* hash, const unsigned char* expected, int length ) const
 {
 	/*
 	for( int i = 0; i < length; ++i )
@@ -276,7 +276,7 @@ bool PickAndShowel::_equals( const unsigned char* hash, const unsigned char* exp
 	return true;
 }
 
-unsigned char PickAndShowel::_fromASCII( const char c ) const
+inline unsigned char PickAndShowel::_fromASCII( const char c ) const
 {
 	unsigned char r( '0' );
 	
@@ -290,7 +290,7 @@ unsigned char PickAndShowel::_fromASCII( const char c ) const
 	return r;
 }
 
-size_t PickAndShowel::_getNumberOfbytes( int n ) const
+inline size_t PickAndShowel::_getNumberOfbytes( int n ) const
 {
 	size_t r = 1;
 	
