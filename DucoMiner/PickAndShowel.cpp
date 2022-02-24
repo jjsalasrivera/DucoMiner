@@ -186,7 +186,7 @@ inline int PickAndShowel::_searchResult( JobTokens& job ) const throw()
 	SHA1_Init(&ctx);
 	SHA1_Update(&ctx, job.lastHash, sizeOfHash);
 	SHA_CTX ctx_copy;
-	
+
 	for( int i = 0; i <= job.diff * 100; ++i)
 	{
 		//strcpy( tmp, job.lastHash );
@@ -194,7 +194,6 @@ inline int PickAndShowel::_searchResult( JobTokens& job ) const throw()
 		//strcat(tmp, (const char*)charNumber);
 		//sprintf(tmp,"%s%d", job.lastHash,i);
 		//SHA_CTX ctx_copy(ctx);
-		
 		ctx_copy = ctx;
 		SHA1_Update(&ctx_copy, charNumber, _getNumberOfbytes(i) );
 		SHA1_Final(hash, &ctx_copy);
@@ -267,11 +266,11 @@ inline bool PickAndShowel::_equals( const unsigned char* hash, const unsigned ch
 	
 	while( length-- )
 	{
-		if( *h != *e )
+		if( *h++ != *e++ )
 			return false;
 		
-		++h;
-		++e;
+		//++h;
+		//++e;
 	}
 	
 	return true;
