@@ -29,8 +29,8 @@ private:
 	void _getMOTD();
 	bool _askJob( JobTokens& tokens, const char* userName, const char* diff );
 	void _sendAndReceive( const char* message, char* response, int length );
-	int _searchResult( JobTokens& job ) const;
-	bool _equals( const unsigned char* hash, const unsigned char* expected, int length  ) const;
+	int _searchResult( JobTokens& job ) const throw();
+	bool _equals( const unsigned char* hash, const unsigned char* expected, int length  ) const throw();
 	unsigned char _fromASCII( const char c ) const;
 	size_t _getNumberOfbytes( int n ) const;
 	void _sendResult( int result, float hashRate, const char* identifier, int threadId, int difficult, float seconds );

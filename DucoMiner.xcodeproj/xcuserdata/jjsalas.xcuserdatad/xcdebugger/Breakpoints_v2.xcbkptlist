@@ -154,7 +154,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DucoMiner/PickAndShowel.cpp"
-            timestampString = "666915078.943558"
+            timestampString = "667004073.287712"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "42"
@@ -170,7 +170,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DucoMiner/PickAndShowel.cpp"
-            timestampString = "666915078.94463"
+            timestampString = "667004073.288484"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "37"
@@ -186,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DucoMiner/PickAndShowel.cpp"
-            timestampString = "666915078.945285"
+            timestampString = "667004073.289049"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "222"
-            endingLineNumber = "222"
+            startingLineNumber = "235"
+            endingLineNumber = "235"
             landmarkName = "PickAndShowel::_sendResult( int result, float hashRate, const char* identifier, int threadId, int difficult, float seconds )"
             landmarkType = "7">
          </BreakpointContent>
@@ -202,27 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DucoMiner/PickAndShowel.cpp"
-            timestampString = "666915078.945927"
+            timestampString = "667004073.289626"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "226"
-            endingLineNumber = "226"
-            landmarkName = "PickAndShowel::_sendResult( int result, float hashRate, const char* identifier, int threadId, int difficult, float seconds )"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DucoMiner/PickAndShowel.cpp"
-            timestampString = "666915078.946553"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "246"
-            endingLineNumber = "246"
+            startingLineNumber = "239"
+            endingLineNumber = "239"
             landmarkName = "PickAndShowel::_getTime()"
             landmarkType = "7">
          </BreakpointContent>
@@ -234,11 +218,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DucoMiner/PickAndShowel.cpp"
-            timestampString = "666915078.951689"
+            timestampString = "667004073.290192"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "192"
-            endingLineNumber = "192"
+            startingLineNumber = "259"
+            endingLineNumber = "259"
+            landmarkName = "PickAndShowel::_equals( const unsigned char* hash, const unsigned char* expected, int length )"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DucoMiner/PickAndShowel.cpp"
+            timestampString = "667004073.290745"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "193"
+            endingLineNumber = "193"
             landmarkName = "PickAndShowel::_searchResult( JobTokens&amp; job )"
             landmarkType = "7">
          </BreakpointContent>
@@ -250,27 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DucoMiner/PickAndShowel.cpp"
-            timestampString = "666915078.952919"
+            timestampString = "667004073.291308"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "204"
-            endingLineNumber = "204"
-            landmarkName = "PickAndShowel::_searchResult( JobTokens&amp; job )"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DucoMiner/PickAndShowel.cpp"
-            timestampString = "666915078.95399"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "231"
-            endingLineNumber = "231"
+            startingLineNumber = "217"
+            endingLineNumber = "217"
             landmarkName = "PickAndShowel::_sendResult( int result, float hashRate, const char* identifier, int threadId, int difficult, float seconds )"
             landmarkType = "7">
          </BreakpointContent>
@@ -282,7 +266,23 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DucoMiner/PickAndShowel.cpp"
-            timestampString = "666915078.954832"
+            timestampString = "667004073.291864"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "244"
+            endingLineNumber = "244"
+            landmarkName = "PickAndShowel::_getTime()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DucoMiner/PickAndShowel.cpp"
+            timestampString = "667004073.292415"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "16"
@@ -298,11 +298,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DucoMiner/PickAndShowel.cpp"
-            timestampString = "666915078.955672"
+            timestampString = "667004073.292969"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "280"
-            endingLineNumber = "280"
+            startingLineNumber = "289"
+            endingLineNumber = "289"
             landmarkName = "PickAndShowel::_fromASCII( const char c )"
             landmarkType = "7">
          </BreakpointContent>
@@ -314,12 +314,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DucoMiner/PickAndShowel.cpp"
-            timestampString = "666915078.957249"
+            timestampString = "667004073.293516"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "271"
-            endingLineNumber = "271"
-            landmarkName = "PickAndShowel::_equals( const unsigned char* hash, const unsigned char* expected, int length )"
+            startingLineNumber = "283"
+            endingLineNumber = "283"
+            landmarkName = "PickAndShowel::_fromASCII( const char c )"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -330,11 +330,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DucoMiner/PickAndShowel.cpp"
-            timestampString = "666915078.958029"
+            timestampString = "667004073.29407"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "215"
-            endingLineNumber = "215"
+            startingLineNumber = "228"
+            endingLineNumber = "228"
             landmarkName = "PickAndShowel::_sendResult( int result, float hashRate, const char* identifier, int threadId, int difficult, float seconds )"
             landmarkType = "7">
          </BreakpointContent>
@@ -346,7 +346,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DucoMiner/PickAndShowel.cpp"
-            timestampString = "666915078.958653"
+            timestampString = "667004073.294616"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "44"
@@ -362,12 +362,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DucoMiner/PickAndShowel.cpp"
-            timestampString = "666915078.959251"
+            timestampString = "667004073.295153"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "270"
-            endingLineNumber = "270"
-            landmarkName = "PickAndShowel::_equals( const unsigned char* hash, const unsigned char* expected, int length )"
+            startingLineNumber = "282"
+            endingLineNumber = "282"
+            landmarkName = "PickAndShowel::_fromASCII( const char c )"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DucoMiner/PickAndShowel.cpp"
+            timestampString = "667004073.296201"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "212"
+            endingLineNumber = "212"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DucoMiner/PickAndShowel.cpp"
+            timestampString = "667004078.392795"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "211"
+            endingLineNumber = "211"
+            landmarkName = "PickAndShowel::_searchResult( JobTokens&amp; job )"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

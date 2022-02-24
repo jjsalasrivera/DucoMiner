@@ -165,7 +165,7 @@ void PickAndShowel::_sendAndReceive( const char* message, char* response, int le
 	}
 }
 
-inline int PickAndShowel::_searchResult( JobTokens& job ) const
+inline int PickAndShowel::_searchResult( JobTokens& job ) const throw()
 {
 	int res( 0 );
 	unsigned char hash[SHA_DIGEST_LENGTH]; // == 20
@@ -185,6 +185,7 @@ inline int PickAndShowel::_searchResult( JobTokens& job ) const
 	SHA_CTX ctx;
 	SHA1_Init(&ctx);
 	SHA1_Update(&ctx, job.lastHash, sizeOfHash);
+	SHA_CTX ctx_copy;
 	
 	for( int i = 0; i <= job.diff * 100; ++i)
 	{
@@ -192,11 +193,11 @@ inline int PickAndShowel::_searchResult( JobTokens& job ) const
 		sprintf(charNumber, "%d", i);
 		//strcat(tmp, (const char*)charNumber);
 		//sprintf(tmp,"%s%d", job.lastHash,i);
-		SHA_CTX ctx_copy(ctx);
+		//SHA_CTX ctx_copy(ctx);
 		
+		ctx_copy = ctx;
 		SHA1_Update(&ctx_copy, charNumber, _getNumberOfbytes(i) );
 		SHA1_Final(hash, &ctx_copy);
-		
 		//SHA1 ((unsigned const char*)tmp, sizeOfHash + _getNumberOfbytes(i), hash);
 		
 		if( _equals( hash, expected_hash_byte, SHA_DIGEST_LENGTH))
@@ -249,7 +250,7 @@ const char* PickAndShowel::_getTime() const
 	return strTime;
 }
 
-inline bool PickAndShowel::_equals( const unsigned char* hash, const unsigned char* expected, int length ) const
+inline bool PickAndShowel::_equals( const unsigned char* hash, const unsigned char* expected, int length ) const throw()
 {
 	/*
 	for( int i = 0; i < length; ++i )
