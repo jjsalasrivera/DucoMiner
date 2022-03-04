@@ -5,6 +5,10 @@
 #include <thread>
 #include <vector>
 
+#define LOWDIFF 25000000
+#define MEDIUMDIFF 250000000
+#define HIGHDIFF 1000000000
+
 using namespace std;
 using namespace nlohmann;
 
@@ -18,5 +22,7 @@ public:
 private:
 	json _configuration;
 	vector<thread> _threads;
+	
+	void InitializeNumbers( string Difficult );
 };
 

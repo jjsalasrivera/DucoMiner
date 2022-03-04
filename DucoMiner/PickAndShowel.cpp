@@ -6,6 +6,7 @@
 #include <openssl/sha.h>
 #include <ctime>
 #include <string>
+#include "NumberLookUp.h"
 
 using namespace std;
 
@@ -168,10 +169,9 @@ void PickAndShowel::_sendAndReceive( const char* message, char* response, int le
 inline int PickAndShowel::_searchResult( JobTokens& job ) const throw()
 {
 	int res( 0 );
-	unsigned char hash[SHA_DIGEST_LENGTH]; // == 20
+	unsigned char hash[SHA_DIGEST_LENGTH];
 	unsigned char expected_hash_byte[SHA_DIGEST_LENGTH];
 	
-	//unsigned char charNumber[10];
 	char charNumber[10];
 	size_t sizeOfHash = strlen( job.lastHash );
 	
@@ -181,7 +181,6 @@ inline int PickAndShowel::_searchResult( JobTokens& job ) const throw()
 		expected_hash_byte[j] = e;
 	}
 	
-	//char tmp[60];
 	SHA_CTX ctx;
 	SHA1_Init(&ctx);
 	SHA1_Update(&ctx, job.lastHash, sizeOfHash);
@@ -189,15 +188,19 @@ inline int PickAndShowel::_searchResult( JobTokens& job ) const throw()
 
 	for( int i = 0; i <= job.diff * 100; ++i)
 	{
-		//strcpy( tmp, job.lastHash );
-		sprintf(charNumber, "%d", i);
-		//strcat(tmp, (const char*)charNumber);
-		//sprintf(tmp,"%s%d", job.lastHash,i);
-		//SHA_CTX ctx_copy(ctx);
 		ctx_copy = ctx;
-		SHA1_Update(&ctx_copy, charNumber, _getNumberOfbytes(i) );
+
+		if( i < NumberLookUp::size )
+		{
+			SHA1_Update(&ctx_copy, NumberLookUp::LookUp[i], _getNumberOfbytes(i) );
+		}
+		else
+		{
+			sprintf(charNumber, "%d", i);
+			SHA1_Update(&ctx_copy, charNumber, _getNumberOfbytes(i) );
+		}
+
 		SHA1_Final(hash, &ctx_copy);
-		//SHA1 ((unsigned const char*)tmp, sizeOfHash + _getNumberOfbytes(i), hash);
 		
 		if( _equals( hash, expected_hash_byte, SHA_DIGEST_LENGTH))
 		{
@@ -251,16 +254,6 @@ const char* PickAndShowel::_getTime() const
 
 inline bool PickAndShowel::_equals( const unsigned char* hash, const unsigned char* expected, int length ) const throw()
 {
-	/*
-	for( int i = 0; i < length; ++i )
-	{
-		if(hash[i] != expected[i])
-			return false;
-	}
-	*/
-	//return memcmp( hash, expected, SHA_DIGEST_LENGTH) == 0;
-	
-	
 	const unsigned char* h = hash;
 	const unsigned char* e = expected;
 	
@@ -268,9 +261,6 @@ inline bool PickAndShowel::_equals( const unsigned char* hash, const unsigned ch
 	{
 		if( *h++ != *e++ )
 			return false;
-		
-		//++h;
-		//++e;
 	}
 	
 	return true;

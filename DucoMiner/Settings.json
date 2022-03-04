@@ -2,7 +2,7 @@
 	"UserName": "juasalriv",
 	"Intensity": 97,
 	"Threads": 2,
-	"Start_Diff": "LOW",
+	"Start_Diff": "MEDIUM",
 	"MinerIdentifier": "Chani",
 	"IP": "212.115.108.82",
 	"Port": 6000

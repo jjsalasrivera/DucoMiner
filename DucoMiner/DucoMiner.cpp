@@ -1,4 +1,5 @@
 #include "DucoMiner.h"
+#include "NumberLookUp.h"
 #include <iostream>
 #include "Logger.h"
 #include <fstream>
@@ -9,7 +10,7 @@ using namespace std;
 bool DucoMiner::Init()
 {
 	bool res = false;
-	Logger::White( "Initialicinf Duco Miner..." );
+	Logger::White( "Initializing Duco Miner..." );
 
 	try
 	{
@@ -32,6 +33,9 @@ bool DucoMiner::Init()
 				sprintf( message, "Number of threads configured is %d, we recomend to use %d", _configuration["Threads"].get<int>(), processor_count);
 				Logger::Red(message);
 			}
+			
+			Logger::White("Initialing char numbers, this may take a time");
+			InitializeNumbers( _configuration["Start_Diff"].get<string>() );
 
 			res = true;
 		}
@@ -73,5 +77,29 @@ void DucoMiner::Stop()
 {
 	// Stop miners
 	PickAndShowel::run = false;
+}
+
+void DucoMiner::InitializeNumbers( string Difficult )
+{
+	
+	int diff = 25000000;
+	/*
+	if( Difficult == "MEDIUM" == 0 )
+	{
+		diff = MEDIUMDIFF;
+	}
+	else if( Difficult == "HIGH" || Difficult == "NET")
+	{
+		diff = HIGHDIFF;
+	}
+	*/
+	NumberLookUp::size = diff;
+	NumberLookUp::LookUp = new char *[diff];
+	
+	for(int i = 0; i < diff; ++i )
+	{
+		NumberLookUp::LookUp[ i ] = new char [MAXNUMBERLENGHT];
+		sprintf(NumberLookUp::LookUp[ i ], "%d", i);
+	}
 }
 

@@ -28,6 +28,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		543FDF1D27D26C81003C367D /* NumberLookUp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NumberLookUp.h; sourceTree = "<group>"; };
 		547C879427A1F60E00091073 /* DucoMiner */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DucoMiner; sourceTree = BUILT_PRODUCTS_DIR; };
 		547C879727A1F60E00091073 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		547C879E27A1F79200091073 /* Settings.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Settings.json; sourceTree = "<group>"; };
@@ -81,6 +82,7 @@
 				547C87A527A335B700091073 /* Logger.h */,
 				54B08C4F27B309A7000040BA /* PickAndShowel.cpp */,
 				54B08C5027B309A7000040BA /* PickAndShowel.h */,
+				543FDF1D27D26C81003C367D /* NumberLookUp.h */,
 			);
 			path = DucoMiner;
 			sourceTree = "<group>";
