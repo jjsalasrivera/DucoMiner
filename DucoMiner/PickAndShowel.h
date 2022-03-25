@@ -28,7 +28,7 @@ private:
 	void _checkConnection( const char* IP, int Port, int threadId );
 	void _getMOTD();
 	bool _askJob( JobTokens& tokens, const char* userName, const char* diff );
-	void _sendAndReceive( const char* message, char* response, int length );
+	ssize_t _sendAndReceive( const char* message, char* response, int length );
 	int _searchResult( JobTokens& job ) const noexcept(true);
 	bool _equals( const unsigned char* hash, const unsigned char* expected, int length ) const noexcept(true);
 	unsigned char _fromASCII( const char c ) const;

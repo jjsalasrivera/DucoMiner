@@ -105,10 +105,13 @@ void PickAndShowel::_getMOTD()
 {
 	char buffer[512] = {0};
 	
-	_sendAndReceive("MOTD\n", buffer, 512);
+	ssize_t l = _sendAndReceive("MOTD\n", buffer, 512);
 	
-	Logger::White("MOTD: ");
-	Logger::White(buffer);
+	if( l > 0)
+	{
+		Logger::White("MOTD: ");
+		Logger::White(buffer);
+	}
 }
 
 bool PickAndShowel::_askJob( JobTokens& Tokens, const char* userName, const char* diff )
@@ -120,50 +123,56 @@ bool PickAndShowel::_askJob( JobTokens& Tokens, const char* userName, const char
 	
 	sprintf(jobRequest, "JOB,%s,%s\n", userName, diff);
 	
-	_sendAndReceive( jobRequest, buffer, 128 );
-	
-	// Tokenize
-	char* tokens =  strtok( buffer, "," );
-	
+	ssize_t l = _sendAndReceive( jobRequest, buffer, 128 );
 	int i = 0;
-	while( tokens != NULL && i < 3 )
+
+	if( l > 0 )
 	{
-		if( i == 0 )
-		{
-			Tokens.lastHash = new char[strlen(tokens)+1]();
-			strcpy(Tokens.lastHash, tokens);	//memcpy( Tokens.lastHash, tokens, strlen(tokens)+1);
-			//Tokens.lastHash = tokens;
-		}
-		else if( i == 1 )
-		{
-			Tokens.expectedHash = new char[strlen(tokens)+1]();
-			strcpy(Tokens.expectedHash, tokens);
-		}
-		else if( i == 2 )
-			Tokens.diff = atoi( tokens );
+		// Tokenize
+		char* tokens =  strtok( buffer, "," );
 		
-		tokens = strtok( NULL, "," );
-		++i;
+		while( tokens != NULL && i < 3 )
+		{
+			if( i == 0 )
+			{
+				Tokens.lastHash = new char[strlen(tokens)+1]();
+				strcpy(Tokens.lastHash, tokens);	//memcpy( Tokens.lastHash, tokens, strlen(tokens)+1);
+				//Tokens.lastHash = tokens;
+			}
+			else if( i == 1 )
+			{
+				Tokens.expectedHash = new char[strlen(tokens)+1]();
+				strcpy(Tokens.expectedHash, tokens);
+			}
+			else if( i == 2 )
+				Tokens.diff = atoi( tokens );
+			
+			tokens = strtok( NULL, "," );
+			++i;
+		}
 	}
 	
-	if( i != 3)
+	if( i != 3 || l <= 0)
 		res = false;
 	
 	return res;
 }
 
-void PickAndShowel::_sendAndReceive( const char* message, char* response, int length )
+ssize_t PickAndShowel::_sendAndReceive( const char* message, char* response, int length )
 {
+	ssize_t l = -1;
 	try
 	{
 		send( _socket, message, strlen(message), 0 );
-		recv( _socket, response, length, NULL);
+		l = recv( _socket, response, length, NULL);
 	}
 	catch( exception& ex)
 	{
 		Logger::Red( ex.what() );
 		_isConnected = false;
 	}
+	
+	return l;
 }
 
 inline int PickAndShowel::_searchResult( JobTokens& job ) const throw()
@@ -210,21 +219,24 @@ void PickAndShowel::_sendResult( int result, float hashRate, const char* identif
 	sprintf( message, "%d,%f,DucoMiner V0.1,%s,,%d\n", result, hashRate, identifier, MINER_ID );
 	
 	char response[128];
-	_sendAndReceive( message, response, 128 );
+	ssize_t response_length = _sendAndReceive( message, response, 128 );
 	
 	const char* dateTime = _getTime();
 	
 	char log[128];
 	
-	if( strstr( response, "GOOD\n" ) != NULL )
+	if( response_length > 0 )
 	{
-		sprintf(log,"Core(%d) - %s - Accepted with difficult %d. Hash rate: %f H/s. Time: %f s", threadId, dateTime, difficult, hashRate, seconds );
-		Logger::Green(log);
-	}
-	else
-	{
-		sprintf(log,"Core(%d) - %s - %s - difficult: %d - hashRate: %f H/s, Time: %f s", threadId, dateTime, response, difficult, hashRate, seconds );
-		Logger::Yellow(log);
+		if( strstr( response, "GOOD\n" ) != NULL )
+		{
+			sprintf(log,"Core(%d) - %s - Accepted with difficult %d. Hash rate: %f H/s. Time: %f s", threadId, dateTime, difficult, hashRate, seconds );
+			Logger::Green(log);
+		}
+		else
+		{
+			sprintf(log,"Core(%d) - %s - %s - difficult: %d - hashRate: %f H/s, Time: %f s", threadId, dateTime, response, difficult, hashRate, seconds );
+			Logger::Yellow(log);
+		}
 	}
 	
 	delete [] dateTime;
