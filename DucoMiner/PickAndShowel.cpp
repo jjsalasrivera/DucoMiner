@@ -38,12 +38,11 @@ void PickAndShowel::operator()(int threadId, json configuration )
 			int res = _searchResult( jobTokens );
 			
 			auto stop = chrono::high_resolution_clock::now();
-			float endMilis = (float) chrono::duration_cast<chrono::milliseconds>( stop - start ).count();
-			endMilis = endMilis > 0 ? endMilis : 0.1;	// Avoid division by zero
+			float endMicros = (float) chrono::duration_cast<chrono::microseconds>( stop - start ).count();
 			
-			float hashRate = ((float)res / (endMilis / 1000.0 ));
+			float hashRate = ((float)res / (endMicros / 1000000.0 ));
 			// send result
-			_sendResult(res, hashRate, configuration["MinerIdentifier"].get<string>().c_str(), threadId, jobTokens.diff, endMilis/1000.0 );
+			_sendResult(res, hashRate, configuration["MinerIdentifier"].get<string>().c_str(), threadId, jobTokens.diff, endMicros/1000000.0 );
 			
 			delete[] jobTokens.expectedHash;
 			delete[] jobTokens.lastHash;
