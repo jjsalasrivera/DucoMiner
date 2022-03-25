@@ -32,7 +32,6 @@ private:
 	int _searchResult( JobTokens& job ) const noexcept(true);
 	bool _equals( const unsigned char* hash, const unsigned char* expected, int length ) const noexcept(true);
 	unsigned char _fromASCII( const char c ) const;
-	size_t _getNumberOfbytes( int n ) const;
 	void _sendResult( int result, float hashRate, const char* identifier, int threadId, int difficult, float seconds );
 	const char* _getTime() const;
 };

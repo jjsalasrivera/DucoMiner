@@ -39,6 +39,7 @@ void PickAndShowel::operator()(int threadId, json configuration )
 			
 			auto stop = chrono::high_resolution_clock::now();
 			float endMilis = (float) chrono::duration_cast<chrono::milliseconds>( stop - start ).count();
+			endMilis = endMilis > 0 ? endMilis : 0.1;	// Avoid division by zero
 			
 			float hashRate = ((float)res / (endMilis / 1000.0 ));
 			// send result
@@ -172,7 +173,6 @@ inline int PickAndShowel::_searchResult( JobTokens& job ) const throw()
 	unsigned char hash[SHA_DIGEST_LENGTH];
 	unsigned char expected_hash_byte[SHA_DIGEST_LENGTH];
 	
-	//char charNumber[10];
 	size_t sizeOfHash = strlen( job.lastHash );
 	
 	for(int j = 0; j < SHA_DIGEST_LENGTH; ++j)
@@ -192,7 +192,7 @@ inline int PickAndShowel::_searchResult( JobTokens& job ) const throw()
 
 		//sprintf(charNumber, "%d", i);
 		auto f = fmt::format_int( i );
-		SHA1_Update(&ctx_copy, (const char*)f.data()/*charNumber*/, f.size() /*_getNumberOfbytes(i)*/ );
+		SHA1_Update(&ctx_copy, (const char*)f.data(), f.size() );
 		SHA1_Final(hash, &ctx_copy);
 		
 		if( _equals( hash, expected_hash_byte, SHA_DIGEST_LENGTH))
@@ -269,32 +269,6 @@ inline unsigned char PickAndShowel::_fromASCII( const char c ) const
 		r = c - 55;
 	else
 		r = c - 87;
-	
-	return r;
-}
-
-inline size_t PickAndShowel::_getNumberOfbytes( int n ) const
-{
-	size_t r = 1;
-	
-	if( n < 10)
-		r = 1;
-	else if( n < 100 )
-		r = 2;
-	else if ( n < 1000 )
-		r = 3;
-	else if ( n < 10000 )
-		r = 4;
-	else if ( n < 100000 )
-		r = 5;
-	else if ( n < 1000000 )
-		r = 6;
-	else if ( n < 10000000 )
-		r = 7;
-	else if ( n < 100000000 )
-		r = 8;
-	else if ( n < 1000000000 )
-		r = 9;
 	
 	return r;
 }
