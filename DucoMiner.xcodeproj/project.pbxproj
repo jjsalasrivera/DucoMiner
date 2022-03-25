@@ -12,6 +12,7 @@
 		547C87A627A335B700091073 /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 547C87A427A335B700091073 /* Logger.cpp */; };
 		547C87AB27A58D8D00091073 /* Settings.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = 547C879E27A1F79200091073 /* Settings.json */; };
 		54B08C5127B309A7000040BA /* PickAndShowel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54B08C4F27B309A7000040BA /* PickAndShowel.cpp */; };
+		54B715C727EE1DA50085120C /* format.cc in Sources */ = {isa = PBXBuildFile; fileRef = 54B715C627EE1DA50085120C /* format.cc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -39,6 +40,10 @@
 		547C87A727A347A200091073 /* json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = json.h; sourceTree = "<group>"; };
 		54B08C4F27B309A7000040BA /* PickAndShowel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PickAndShowel.cpp; sourceTree = "<group>"; };
 		54B08C5027B309A7000040BA /* PickAndShowel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PickAndShowel.h; sourceTree = "<group>"; };
+		54B715C327EE1C770085120C /* format-inl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "format-inl.h"; sourceTree = "<group>"; };
+		54B715C427EE1C810085120C /* format.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = format.h; sourceTree = "<group>"; };
+		54B715C527EE1CB00085120C /* core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = core.h; sourceTree = "<group>"; };
+		54B715C627EE1DA50085120C /* format.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = format.cc; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,16 +78,28 @@
 			children = (
 				547C87A727A347A200091073 /* json.h */,
 				547C879727A1F60E00091073 /* main.cpp */,
-				547C879E27A1F79200091073 /* Settings.json */,
 				547C879F27A1FD5000091073 /* DucoMiner.h */,
+				547C879E27A1F79200091073 /* Settings.json */,
 				547C87A127A1FE7E00091073 /* AbstractMiner.h */,
 				547C87A227A1FFF300091073 /* DucoMiner.cpp */,
 				547C87A427A335B700091073 /* Logger.cpp */,
+				54B715C627EE1DA50085120C /* format.cc */,
 				547C87A527A335B700091073 /* Logger.h */,
 				54B08C4F27B309A7000040BA /* PickAndShowel.cpp */,
 				54B08C5027B309A7000040BA /* PickAndShowel.h */,
+				54B715C227EE1B720085120C /* fmt */,
 			);
 			path = DucoMiner;
+			sourceTree = "<group>";
+		};
+		54B715C227EE1B720085120C /* fmt */ = {
+			isa = PBXGroup;
+			children = (
+				54B715C527EE1CB00085120C /* core.h */,
+				54B715C427EE1C810085120C /* format.h */,
+				54B715C327EE1C770085120C /* format-inl.h */,
+			);
+			path = fmt;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,6 +160,7 @@
 			files = (
 				547C87A327A1FFF300091073 /* DucoMiner.cpp in Sources */,
 				547C87A627A335B700091073 /* Logger.cpp in Sources */,
+				54B715C727EE1DA50085120C /* format.cc in Sources */,
 				54B08C5127B309A7000040BA /* PickAndShowel.cpp in Sources */,
 				547C879827A1F60E00091073 /* main.cpp in Sources */,
 			);
@@ -267,14 +285,10 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_STYLE = Automatic;
-				HEADER_SEARCH_PATHS = (
-					"/usr/local/opt/openssl@1.1/include",
-					"/usr/local/opt/fmt/include\n/usr/local/opt/fmt/include\n/usr/local/opt/fmt/include\n/usr/local/opt/fmt/include\n/usr/local/opt/fmt/include",
-				);
+				HEADER_SEARCH_PATHS = "/usr/local/opt/openssl@1.1/include";
 				OTHER_LDFLAGS = (
 					"/usr/local/opt/openssl@1.1/lib/libcrypto.a",
 					"/usr/local/opt/openssl@1.1/lib/libssl.a",
-					/usr/local/opt/fmt/lib/libfmt.a,
 				);
 				OTHER_LIBTOOLFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -287,14 +301,10 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_STYLE = Automatic;
 				GCC_OPTIMIZATION_LEVEL = fast;
-				HEADER_SEARCH_PATHS = (
-					"/usr/local/opt/openssl@1.1/include",
-					"/usr/local/opt/fmt/include\n/usr/local/opt/fmt/include\n/usr/local/opt/fmt/include\n/usr/local/opt/fmt/include\n/usr/local/opt/fmt/include",
-				);
+				HEADER_SEARCH_PATHS = "/usr/local/opt/openssl@1.1/include";
 				OTHER_LDFLAGS = (
 					"/usr/local/opt/openssl@1.1/lib/libcrypto.a",
 					"/usr/local/opt/openssl@1.1/lib/libssl.a",
-					/usr/local/opt/fmt/lib/libfmt.a,
 				);
 				OTHER_LIBTOOLFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
