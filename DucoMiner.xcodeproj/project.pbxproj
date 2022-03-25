@@ -28,7 +28,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		543FDF1D27D26C81003C367D /* NumberLookUp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NumberLookUp.h; sourceTree = "<group>"; };
 		547C879427A1F60E00091073 /* DucoMiner */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DucoMiner; sourceTree = BUILT_PRODUCTS_DIR; };
 		547C879727A1F60E00091073 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		547C879E27A1F79200091073 /* Settings.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Settings.json; sourceTree = "<group>"; };
@@ -82,7 +81,6 @@
 				547C87A527A335B700091073 /* Logger.h */,
 				54B08C4F27B309A7000040BA /* PickAndShowel.cpp */,
 				54B08C5027B309A7000040BA /* PickAndShowel.h */,
-				543FDF1D27D26C81003C367D /* NumberLookUp.h */,
 			);
 			path = DucoMiner;
 			sourceTree = "<group>";
@@ -269,10 +267,14 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_STYLE = Automatic;
-				HEADER_SEARCH_PATHS = "/usr/local/opt/openssl@1.1/include";
+				HEADER_SEARCH_PATHS = (
+					"/usr/local/opt/openssl@1.1/include",
+					"/usr/local/opt/fmt/include\n/usr/local/opt/fmt/include\n/usr/local/opt/fmt/include\n/usr/local/opt/fmt/include\n/usr/local/opt/fmt/include",
+				);
 				OTHER_LDFLAGS = (
 					"/usr/local/opt/openssl@1.1/lib/libcrypto.a",
 					"/usr/local/opt/openssl@1.1/lib/libssl.a",
+					/usr/local/opt/fmt/lib/libfmt.a,
 				);
 				OTHER_LIBTOOLFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -285,10 +287,14 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_STYLE = Automatic;
 				GCC_OPTIMIZATION_LEVEL = fast;
-				HEADER_SEARCH_PATHS = "/usr/local/opt/openssl@1.1/include";
+				HEADER_SEARCH_PATHS = (
+					"/usr/local/opt/openssl@1.1/include",
+					"/usr/local/opt/fmt/include\n/usr/local/opt/fmt/include\n/usr/local/opt/fmt/include\n/usr/local/opt/fmt/include\n/usr/local/opt/fmt/include",
+				);
 				OTHER_LDFLAGS = (
 					"/usr/local/opt/openssl@1.1/lib/libcrypto.a",
 					"/usr/local/opt/openssl@1.1/lib/libssl.a",
+					/usr/local/opt/fmt/lib/libfmt.a,
 				);
 				OTHER_LIBTOOLFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";

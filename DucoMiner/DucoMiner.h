@@ -22,7 +22,4 @@ public:
 private:
 	json _configuration;
 	vector<thread> _threads;
-	
-	void InitializeNumbers( string Difficult );
 };
-

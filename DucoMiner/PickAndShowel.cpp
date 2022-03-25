@@ -6,7 +6,7 @@
 #include <openssl/sha.h>
 #include <ctime>
 #include <string>
-#include "NumberLookUp.h"
+#include <fmt/format.h>
 
 using namespace std;
 
@@ -172,7 +172,7 @@ inline int PickAndShowel::_searchResult( JobTokens& job ) const throw()
 	unsigned char hash[SHA_DIGEST_LENGTH];
 	unsigned char expected_hash_byte[SHA_DIGEST_LENGTH];
 	
-	char charNumber[10];
+	//char charNumber[10];
 	size_t sizeOfHash = strlen( job.lastHash );
 	
 	for(int j = 0; j < SHA_DIGEST_LENGTH; ++j)
@@ -190,16 +190,9 @@ inline int PickAndShowel::_searchResult( JobTokens& job ) const throw()
 	{
 		ctx_copy = ctx;
 
-		if( i < NumberLookUp::size )
-		{
-			SHA1_Update(&ctx_copy, NumberLookUp::LookUp[i], _getNumberOfbytes(i) );
-		}
-		else
-		{
-			sprintf(charNumber, "%d", i);
-			SHA1_Update(&ctx_copy, charNumber, _getNumberOfbytes(i) );
-		}
-
+		//sprintf(charNumber, "%d", i);
+		auto f = fmt::format_int( i );
+		SHA1_Update(&ctx_copy, (const char*)f.data()/*charNumber*/, f.size() /*_getNumberOfbytes(i)*/ );
 		SHA1_Final(hash, &ctx_copy);
 		
 		if( _equals( hash, expected_hash_byte, SHA_DIGEST_LENGTH))
