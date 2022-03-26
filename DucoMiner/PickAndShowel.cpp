@@ -194,7 +194,7 @@ inline int PickAndShowel::_searchResult( JobTokens& job ) const throw()
 	SHA1_Update(&ctx, job.lastHash, sizeOfHash);
 	SHA_CTX ctx_copy;
 
-	long endNanos(0);
+	unsigned long endNanos(0);
 	for( int i = 0; i <= job.diff * 100; ++i)
 	{
 		ctx_copy = ctx;
