@@ -28,9 +28,9 @@ void PickAndShowel::operator()(int threadId, json configuration )
 		JobTokens jobTokens;
 		jobTokens.expectedHash = NULL;
 		jobTokens.lastHash = NULL;
-		_askJob(jobTokens, configuration["UserName"].get<string>().c_str(), configuration["Start_Diff"].get<string>().c_str());
+		bool job_res = _askJob(jobTokens, configuration["UserName"].get<string>().c_str(), configuration["Start_Diff"].get<string>().c_str());
 		
-		if( jobTokens.expectedHash != NULL && jobTokens.lastHash != NULL)
+		if( job_res && jobTokens.expectedHash != NULL && jobTokens.lastHash != NULL)
 		{
 			// calculate hash
 			auto start = chrono::high_resolution_clock::now();
@@ -199,7 +199,13 @@ inline int PickAndShowel::_searchResult( JobTokens& job ) const throw()
 		ctx_copy = ctx;
 
 		//sprintf(charNumber, "%d", i);
+		auto start = chrono::high_resolution_clock::now();
 		auto f = fmt::format_int( i );
+		auto stop = chrono::high_resolution_clock::now();
+		float endNanos = (float) chrono::duration_cast<chrono::nanoseconds>( stop - start ).count();
+		char log[64];
+		sprintf(log, "Conversion in: %f nanos\n", endNanos);
+		Logger::Yellow(log);
 		SHA1_Update(&ctx_copy, (const char*)f.data(), f.size() );
 		SHA1_Final(hash, &ctx_copy);
 		
