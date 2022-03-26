@@ -199,14 +199,13 @@ inline int PickAndShowel::_searchResult( JobTokens& job ) const throw()
 	{
 		ctx_copy = ctx;
 
-		//sprintf(charNumber, "%d", i);
-		auto start = chrono::high_resolution_clock::now();
 		auto f = fmt::format_int( i );
-		auto stop = chrono::high_resolution_clock::now();
-		endNanos += chrono::duration_cast<chrono::nanoseconds>( stop - start ).count();
 		
+		auto start = chrono::high_resolution_clock::now();
 		SHA1_Update(&ctx_copy, (const char*)f.data(), f.size() );
 		SHA1_Final(hash, &ctx_copy);
+		auto stop = chrono::high_resolution_clock::now();
+		endNanos += chrono::duration_cast<chrono::nanoseconds>( stop - start ).count();
 		
 		if( _equals( hash, expected_hash_byte, SHA_DIGEST_LENGTH))
 		{
