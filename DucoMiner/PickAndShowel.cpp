@@ -202,6 +202,7 @@ inline int PickAndShowel::_searchResult( JobTokens& job ) const throw()
 		auto f = fmt::format_int( i );
 		SHA1_Update(&ctx_copy, (const char*)f.data(), f.size() );
 		SHA1_Final(hash, &ctx_copy);
+		f.~format_int();
 		
 		if( _equals( hash, expected_hash_byte, SHA_DIGEST_LENGTH))
 		{
