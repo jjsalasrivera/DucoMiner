@@ -119,11 +119,11 @@ bool PickAndShowel::_askJob( JobTokens& Tokens, const char* userName, const char
 	bool res = true;
 	
 	char jobRequest[128];
-	char buffer[128];
+	char buffer[256];
 	
 	sprintf(jobRequest, "JOB,%s,%s\n", userName, diff);
 	
-	ssize_t l = _sendAndReceive( jobRequest, buffer, 128 );
+	ssize_t l = _sendAndReceive( jobRequest, buffer, 256 );
 	int i = 0;
 
 	if( l > 0 )
@@ -219,7 +219,7 @@ void PickAndShowel::_sendResult( int result, float hashRate, const char* identif
 	sprintf( message, "%d,%f,DucoMiner V0.1,%s,,%d\n", result, hashRate, identifier, MINER_ID );
 	
 	char response[256];
-	ssize_t response_length = _sendAndReceive( message, response, 128 );
+	ssize_t response_length = _sendAndReceive( message, response, 256 );
 	
 	const char* dateTime = _getTime();
 	
