@@ -202,7 +202,6 @@ inline int PickAndShowel::_searchResult( JobTokens& job ) const throw()
 		auto f = fmt::format_int( i );
 		SHA1_Update(&ctx_copy, (const char*)f.data(), f.size() );
 		SHA1_Final(hash, &ctx_copy);
-		f.~format_int();
 		
 		if( _equals( hash, expected_hash_byte, SHA_DIGEST_LENGTH))
 		{
@@ -219,12 +218,12 @@ void PickAndShowel::_sendResult( int result, float hashRate, const char* identif
 	char message[128];
 	sprintf( message, "%d,%f,DucoMiner V0.1,%s,,%d\n", result, hashRate, identifier, MINER_ID );
 	
-	char response[128];
+	char response[256];
 	ssize_t response_length = _sendAndReceive( message, response, 128 );
 	
 	const char* dateTime = _getTime();
 	
-	char log[128];
+	char log[256];
 	
 	if( response_length > 0 )
 	{
