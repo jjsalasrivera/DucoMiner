@@ -194,6 +194,7 @@ inline int PickAndShowel::_searchResult( JobTokens& job ) const throw()
 	SHA1_Update(&ctx, job.lastHash, sizeOfHash);
 	SHA_CTX ctx_copy;
 
+	long endNanos(0);
 	for( int i = 0; i <= job.diff * 100; ++i)
 	{
 		ctx_copy = ctx;
@@ -202,15 +203,17 @@ inline int PickAndShowel::_searchResult( JobTokens& job ) const throw()
 		auto start = chrono::high_resolution_clock::now();
 		auto f = fmt::format_int( i );
 		auto stop = chrono::high_resolution_clock::now();
-		float endNanos = (float) chrono::duration_cast<chrono::nanoseconds>( stop - start ).count();
-		char log[64];
-		sprintf(log, "Conversion in: %f nanos\n", endNanos);
-		Logger::Yellow(log);
+		endNanos += chrono::duration_cast<chrono::nanoseconds>( stop - start ).count();
+		
 		SHA1_Update(&ctx_copy, (const char*)f.data(), f.size() );
 		SHA1_Final(hash, &ctx_copy);
 		
 		if( _equals( hash, expected_hash_byte, SHA_DIGEST_LENGTH))
 		{
+			char log[64];
+			sprintf(log, "Conversion in: %ld nanos\n", endNanos/i);
+			Logger::Yellow(log);
+
 			res = i;
 			break;
 		}
