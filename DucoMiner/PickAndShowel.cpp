@@ -163,8 +163,11 @@ ssize_t PickAndShowel::_sendAndReceive( const char* message, char* response, int
 	ssize_t l = -1;
 	try
 	{
+		Logger::White("Antes de enviar");
 		send( _socket, message, strlen(message), 0 );
+		Logger::White("Despues de enviar, antes de recibir");
 		l = recv( _socket, response, length, NULL);
+		Logger::White("Despues de recibir");
 	}
 	catch( exception& ex)
 	{
@@ -200,19 +203,11 @@ inline int PickAndShowel::_searchResult( JobTokens& job ) const throw()
 		ctx_copy = ctx;
 
 		auto f = fmt::format_int( i );
-		
-		auto start = chrono::high_resolution_clock::now();
-		SHA1_Update(&ctx_copy, (const char*)f.data(), f.size() );
+				SHA1_Update(&ctx_copy, (const char*)f.data(), f.size() );
 		SHA1_Final(hash, &ctx_copy);
-		auto stop = chrono::high_resolution_clock::now();
-		endNanos += chrono::duration_cast<chrono::nanoseconds>( stop - start ).count();
-		
+
 		if( _equals( hash, expected_hash_byte, SHA_DIGEST_LENGTH))
 		{
-			char log[64];
-			sprintf(log, "Conversion in: %ld nanos\n", endNanos/i);
-			Logger::Yellow(log);
-
 			res = i;
 			break;
 		}
