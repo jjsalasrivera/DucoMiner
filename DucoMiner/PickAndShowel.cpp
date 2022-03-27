@@ -163,11 +163,15 @@ ssize_t PickAndShowel::_sendAndReceive( const char* message, char* response, int
 	ssize_t l = -1;
 	try
 	{
+		char buffer[256];
+
 		Logger::White("Antes de enviar");
-		send( _socket, message, strlen(message), 0 );
-		Logger::White("Despues de enviar, antes de recibir");
+		ssize_t lsend = send( _socket, message, strlen(message), 0 );
+		sprintf(buffer, "Despues de enviar (%ld), antes de recibir", lsend);
+		Logger::White(buffer);
 		l = recv( _socket, response, length, NULL);
-		Logger::White("Despues de recibir");
+		sprintf(buffer, "Despues de recibir (%ld)", l);
+		Logger::White(buffer);
 	}
 	catch( exception& ex)
 	{
